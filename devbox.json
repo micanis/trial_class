@@ -1,0 +1,25 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.16.0/.schema/devbox.schema.json",
+
+  "packages": [
+    "typescript-language-server@latest",
+    "biome@latest",
+    "vue-language-server@latest",
+    "marksman@latest",
+    "bun@latest",
+    "uv@latest"
+  ],
+
+  "shell": {
+    "init_hook": [
+      "uv tool install jupytext --quiet",
+      "NU=\"$(command -v nu 2>/dev/null || true)\"",
+      "[ -z \"$NU\" ] && [ -x \"$HOME/.local/bin/nu\" ] && NU=\"$HOME/.local/bin/nu\"",
+      "if [ -z \"$DEVBOX_NU\" ] && [ -x \"$NU\" ]; then export DEVBOX_NU=1; exec \"$NU\"; fi"
+    ],
+    "scripts": {
+      "fmt":  "biome format --write .",
+      "lint": "biome lint ."
+    }
+  }
+}
